@@ -8,6 +8,11 @@ surface the current newsletter. A feature-flagged **Welcome Week Potluck** page 
 parents sign up to bring a dish, and a password-protected **admin dashboard** lets
 officers view sign-ups and toggle features.
 
+> **New officer? Start here.** [`PERSONALIZATION.md`](PERSONALIZATION.md) lists everything
+> to change to make the site your chapter's, and where. A styled, printable version for
+> sharing/handoff lives at [`docs/personalization-guide.html`](docs/personalization-guide.html)
+> (open it in a browser).
+
 ---
 
 ## 1. What's included

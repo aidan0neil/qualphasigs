@@ -1,0 +1,603 @@
+<title>Personalization Guide · Alpha Sigma Phi – Theta Tau</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+  /* ============================ Design tokens ============================ */
+  :root {
+    --paper: #f4f5f7;
+    --surface: #ffffff;
+    --surface-2: #eef0f4;
+    --ink: #111a2e;
+    --body: #414b5c;
+    --muted: #6a7180;
+    --line: #e0e3ea;
+    --line-strong: #cdd2dc;
+    --navy-deep: #0a1120;
+    --navy-mid: #16223a;
+    --cardinal: #8c1d2c;
+    --cardinal-bright: #a4243b;
+    --cardinal-soft: #f7e9eb;
+
+    --p-essential: #8c1d2c;
+    --p-essential-bg: #f7e7e9;
+    --p-recommended: #9a6412;
+    --p-recommended-bg: #f6ecd8;
+    --p-optional: #55607a;
+    --p-optional-bg: #e9ebf1;
+
+    --font-display: Georgia, "Times New Roman", serif;
+    --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --font-mono: ui-monospace, "SF Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+
+    --maxw: 60rem;
+    --radius: 14px;
+    --shadow: 0 1px 2px rgba(10, 17, 32, 0.04), 0 14px 34px -20px rgba(10, 17, 32, 0.22);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #090f1c;
+      --surface: #111a2e;
+      --surface-2: #16223a;
+      --ink: #f2f4f8;
+      --body: #c3cbdb;
+      --muted: #8a93a8;
+      --line: #22304b;
+      --line-strong: #2c3d5e;
+      --navy-deep: #05090f;
+      --navy-mid: #101b30;
+      --cardinal: #dd7583;
+      --cardinal-bright: #e58c98;
+      --cardinal-soft: #2a1418;
+
+      --p-essential: #e6939d;
+      --p-essential-bg: #2c1519;
+      --p-recommended: #e0b25e;
+      --p-recommended-bg: #2b2413;
+      --p-optional: #9aa3b8;
+      --p-optional-bg: #1b2438;
+      --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 16px 40px -22px rgba(0, 0, 0, 0.6);
+    }
+  }
+  :root[data-theme="light"] {
+    --paper: #f4f5f7; --surface: #ffffff; --surface-2: #eef0f4; --ink: #111a2e;
+    --body: #414b5c; --muted: #6a7180; --line: #e0e3ea; --line-strong: #cdd2dc;
+    --navy-deep: #0a1120; --navy-mid: #16223a; --cardinal: #8c1d2c; --cardinal-bright: #a4243b;
+    --cardinal-soft: #f7e9eb; --p-essential: #8c1d2c; --p-essential-bg: #f7e7e9;
+    --p-recommended: #9a6412; --p-recommended-bg: #f6ecd8; --p-optional: #55607a;
+    --p-optional-bg: #e9ebf1; --shadow: 0 1px 2px rgba(10,17,32,.04), 0 14px 34px -20px rgba(10,17,32,.22);
+  }
+  :root[data-theme="dark"] {
+    --paper: #090f1c; --surface: #111a2e; --surface-2: #16223a; --ink: #f2f4f8;
+    --body: #c3cbdb; --muted: #8a93a8; --line: #22304b; --line-strong: #2c3d5e;
+    --navy-deep: #05090f; --navy-mid: #101b30; --cardinal: #dd7583; --cardinal-bright: #e58c98;
+    --cardinal-soft: #2a1418; --p-essential: #e6939d; --p-essential-bg: #2c1519;
+    --p-recommended: #e0b25e; --p-recommended-bg: #2b2413; --p-optional: #9aa3b8;
+    --p-optional-bg: #1b2438; --shadow: 0 1px 2px rgba(0,0,0,.3), 0 16px 40px -22px rgba(0,0,0,.6);
+  }
+
+  /* ================================ Base ================================ */
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { transition: none !important; animation: none !important; }
+  }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--body);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3 { color: var(--ink); font-family: var(--font-display); text-wrap: balance; margin: 0; }
+  a { color: var(--cardinal-bright); }
+  :focus-visible { outline: 2px solid var(--cardinal-bright); outline-offset: 3px; border-radius: 3px; }
+
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 1.5rem; }
+
+  /* ============================== Masthead ============================== */
+  .masthead {
+    background:
+      radial-gradient(120% 140% at 85% -10%, rgba(164, 36, 59, 0.28), transparent 55%),
+      linear-gradient(160deg, var(--navy-mid), var(--navy-deep));
+    color: #eef1f6;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .masthead__inner { padding: 3.25rem 0 2.75rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .brandline { display: flex; align-items: center; gap: 0.85rem; }
+  .crest { width: 46px; height: auto; flex: none; }
+  .brandline__text { display: flex; flex-direction: column; line-height: 1.15; }
+  .brandline__org { font-family: var(--font-display); font-size: 1.05rem; font-weight: 600; color: #fff; }
+  .brandline__chapter {
+    font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.2em;
+    color: var(--cardinal-bright); font-weight: 600;
+  }
+  .masthead h1 { color: #fff; font-size: clamp(2.1rem, 5.5vw, 3.15rem); font-weight: 600; line-height: 1.05; letter-spacing: -0.01em; }
+  .masthead__eyebrow { font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--cardinal-bright); font-weight: 600; }
+  .masthead__lead { max-width: 46ch; color: #c4ccdb; font-size: 1.05rem; margin: 0; }
+
+  /* ============================== Legend =============================== */
+  .legend {
+    margin-top: -1.4rem; position: relative; z-index: 2;
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: var(--radius); box-shadow: var(--shadow);
+    padding: 1.25rem 1.4rem; display: flex; flex-wrap: wrap; gap: 1.5rem 2rem; align-items: center;
+  }
+  .legend__title { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); font-weight: 700; font-family: var(--font-sans); }
+  .legend__item { display: flex; align-items: center; gap: 0.55rem; font-size: 0.92rem; color: var(--body); }
+
+  /* ============================== Tags ================================= */
+  .tag {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.03em;
+    padding: 0.25rem 0.6rem; border-radius: 999px; font-family: var(--font-sans);
+    text-transform: uppercase; white-space: nowrap;
+  }
+  .tag::before { content: ""; width: 0.5rem; height: 0.5rem; border-radius: 50%; background: currentColor; }
+  .tag--essential { color: var(--p-essential); background: var(--p-essential-bg); }
+  .tag--recommended { color: var(--p-recommended); background: var(--p-recommended-bg); }
+  .tag--optional { color: var(--p-optional); background: var(--p-optional-bg); }
+
+  /* ============================== Sections ============================= */
+  main { padding: 3rem 0 4rem; }
+  .intro-note {
+    display: flex; gap: 0.9rem; align-items: flex-start;
+    background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--cardinal);
+    border-radius: 10px; padding: 1rem 1.15rem; margin-bottom: 2.75rem; font-size: 0.95rem; color: var(--body);
+  }
+  .intro-note b { color: var(--ink); }
+
+  .section { border-top: 1px solid var(--line); padding-top: 2.25rem; margin-top: 2.25rem; }
+  .section:first-of-type { border-top: 0; margin-top: 0; padding-top: 0; }
+  .section__head { display: flex; align-items: baseline; gap: 0.9rem; flex-wrap: wrap; }
+  .section__num {
+    font-family: var(--font-display); font-size: 1.05rem; color: var(--cardinal);
+    font-weight: 700; font-variant-numeric: tabular-nums; min-width: 1.6rem;
+  }
+  .section__title { font-size: 1.5rem; font-weight: 600; flex: 1 1 auto; }
+  .section__body { margin-top: 1rem; }
+  .section__body > * + * { margin-top: 1rem; }
+  .section p { margin: 0; }
+  .section ul { margin: 0; padding-left: 1.15rem; }
+  .section li { margin: 0.3rem 0; }
+  .lead { color: var(--body); }
+
+  /* ============================ File chip ============================= */
+  .files { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .file {
+    display: inline-flex; align-items: stretch; border: 1px solid var(--line-strong);
+    border-radius: 8px; overflow: hidden; background: var(--surface-2); max-width: 100%;
+  }
+  .file__label {
+    display: none; align-items: center; padding: 0 0.55rem; font-size: 0.64rem; letter-spacing: 0.1em;
+    text-transform: uppercase; font-weight: 700; color: var(--muted); border-right: 1px solid var(--line-strong);
+  }
+  .file code {
+    font-family: var(--font-mono); font-size: 0.82rem; color: var(--ink);
+    padding: 0.4rem 0.6rem; overflow-x: auto; white-space: nowrap;
+  }
+  .file__copy {
+    border: 0; border-left: 1px solid var(--line-strong); background: transparent; cursor: pointer;
+    color: var(--muted); font-size: 0.7rem; font-weight: 600; padding: 0 0.7rem; font-family: var(--font-sans);
+    transition: background 0.15s, color 0.15s;
+  }
+  .file__copy:hover { background: var(--cardinal); color: #fff; }
+  .file__copy.copied { color: #1a7a3c; }
+
+  .or {
+    display: inline-block; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--muted); background: var(--surface-2); border: 1px solid var(--line); border-radius: 6px; padding: 0.15rem 0.5rem;
+  }
+
+  /* ============================== Tables ============================== */
+  .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; }
+  table { border-collapse: collapse; width: 100%; min-width: 30rem; font-size: 0.9rem; }
+  th, td { text-align: left; padding: 0.6rem 0.85rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+  thead th {
+    font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.09em; color: var(--muted);
+    font-weight: 700; background: var(--surface-2); font-family: var(--font-sans);
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  td:first-child { color: var(--ink); font-weight: 600; white-space: nowrap; }
+  td code, p code, li code { font-family: var(--font-mono); font-size: 0.84em; background: var(--surface-2); border: 1px solid var(--line); border-radius: 5px; padding: 0.05em 0.35em; color: var(--ink); }
+
+  /* ============================== Code =============================== */
+  pre.code {
+    margin: 0; background: var(--navy-deep); color: #dbe2ef; border-radius: 10px;
+    padding: 1rem 1.15rem; overflow-x: auto; font-family: var(--font-mono); font-size: 0.82rem; line-height: 1.6;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  pre.code .c { color: #7f8aa3; font-style: italic; }
+  pre.code .k { color: #e58c98; }
+  pre.code .s { color: #a9d0a1; }
+
+  .callout {
+    background: var(--cardinal-soft); border: 1px solid color-mix(in srgb, var(--cardinal) 25%, transparent);
+    border-radius: 9px; padding: 0.75rem 1rem; font-size: 0.9rem; color: var(--body);
+  }
+  .callout b { color: var(--ink); }
+
+  /* ============================ Checklist ============================ */
+  .checklist { margin-top: 3.25rem; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
+  .checklist__head { background: linear-gradient(160deg, var(--navy-mid), var(--navy-deep)); color: #fff; padding: 1.4rem 1.5rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
+  .checklist__head h2 { color: #fff; font-size: 1.35rem; }
+  .checklist__progress { font-size: 0.8rem; color: #c4ccdb; font-variant-numeric: tabular-nums; display: flex; align-items: center; gap: 0.6rem; }
+  .bar { width: 120px; height: 7px; border-radius: 999px; background: rgba(255,255,255,0.16); overflow: hidden; }
+  .bar__fill { height: 100%; width: 0%; background: var(--cardinal-bright); transition: width 0.35s ease; }
+  .checklist ul { list-style: none; margin: 0; padding: 0.5rem 0.5rem 0.75rem; }
+  .checklist li { margin: 0; }
+  .check {
+    display: flex; gap: 0.8rem; align-items: flex-start; padding: 0.7rem 1rem; border-radius: 9px; cursor: pointer;
+    transition: background 0.15s;
+  }
+  .check:hover { background: var(--surface-2); }
+  .check input { margin: 0.15rem 0 0; width: 1.15rem; height: 1.15rem; accent-color: var(--cardinal); flex: none; cursor: pointer; }
+  .check span { font-size: 0.95rem; color: var(--body); }
+  .check input:checked + span { color: var(--muted); text-decoration: line-through; text-decoration-color: var(--line-strong); }
+  .check span b { color: var(--ink); font-weight: 600; }
+
+  /* ============================== Footer ============================= */
+  footer { border-top: 1px solid var(--line); padding: 2rem 0 3rem; margin-top: 3rem; color: var(--muted); font-size: 0.85rem; text-align: center; }
+  footer a { color: var(--cardinal-bright); text-decoration: none; }
+
+  /* ============================ Responsive ========================== */
+  @media (min-width: 640px) {
+    .file__label { display: inline-flex; }
+    .masthead__inner { padding: 4rem 0 3.25rem; }
+  }
+
+  /* ============================== Print ============================= */
+  @media print {
+    :root { --paper: #fff; --surface: #fff; }
+    body { color: #111; }
+    .masthead { background: none; color: #111; border-bottom: 2px solid #8c1d2c; }
+    .masthead h1, .brandline__org { color: #111; }
+    .masthead__lead { color: #333; }
+    .legend, .checklist, .section, pre.code { break-inside: avoid; box-shadow: none; }
+    .file__copy { display: none; }
+    pre.code { background: #f3f3f3; color: #111; border: 1px solid #ccc; }
+    pre.code .c { color: #666; } pre.code .k, pre.code .s { color: #111; }
+  }
+</style>
+
+<header class="masthead">
+  <div class="wrap masthead__inner">
+    <div class="brandline">
+      <svg class="crest" viewBox="0 0 40 44" role="img" aria-label="Alpha Sigma Phi crest">
+        <path d="M20 1.5 37.5 7v13.5c0 10.7-7.2 18.5-17.5 22C9.7 39 2.5 31.2 2.5 20.5V7L20 1.5Z" fill="rgba(255,255,255,0.06)" stroke="#a4243b" stroke-width="1.4" />
+        <path d="M20 5 34 9.4v10.9c0 8.7-5.8 15.1-14 18.1-8.2-3-14-9.4-14-18.1V9.4L20 5Z" fill="none" stroke="#a4243b" stroke-width="0.9" opacity="0.55" />
+        <text x="20" y="26.5" text-anchor="middle" fill="#eef1f6" font-family="Georgia, serif" font-size="12.5" font-weight="600" letter-spacing="-0.5">ΑΣΦ</text>
+      </svg>
+      <span class="brandline__text">
+        <span class="brandline__org">Alpha Sigma Phi</span>
+        <span class="brandline__chapter">Theta Tau Chapter</span>
+      </span>
+    </div>
+    <div>
+      <p class="masthead__eyebrow">Website Handoff</p>
+      <h1>Personalization Guide</h1>
+    </div>
+    <p class="masthead__lead">Everything you need to change to make the chapter website yours — and exactly where to find it. Work top to bottom; the first sections cover most of what matters.</p>
+  </div>
+</header>
+
+<div class="wrap">
+  <section class="legend" aria-label="Priority key">
+    <span class="legend__title">Priority</span>
+    <span class="legend__item"><span class="tag tag--essential">Essential</span> Do before launch</span>
+    <span class="legend__item"><span class="tag tag--recommended">Recommended</span> Do soon</span>
+    <span class="legend__item"><span class="tag tag--optional">Optional</span> Polish anytime</span>
+  </section>
+</div>
+
+<main class="wrap">
+  <p class="intro-note">
+    <span aria-hidden="true">✎</span>
+    <span>Most content lives in plain configuration files — you change the text between quotes, save, and preview with <code>npm run dev</code>. After editing, deploy to publish. File paths below are relative to the project folder; use the <b>Copy</b> button to grab one.</span>
+  </p>
+
+  <!-- 1 -->
+  <section class="section">
+    <div class="section__head">
+      <span class="section__num">01</span>
+      <h2 class="section__title">Core chapter identity</h2>
+      <span class="tag tag--essential">Essential</span>
+    </div>
+    <div class="section__body">
+      <p class="lead">One file drives the site name, footer, contact info, social links, and homepage stats.</p>
+      <div class="files"><span class="file"><span class="file__label">File</span><code>src/config/site.ts</code><button class="file__copy" type="button">Copy</button></span></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Field</th><th>What it is</th></tr></thead>
+          <tbody>
+            <tr><td>organization</td><td>Fraternity name — "Alpha Sigma Phi"</td></tr>
+            <tr><td>chapter</td><td>Your chapter — "Theta Tau Chapter"</td></tr>
+            <tr><td>university</td><td>School — "Quinnipiac University"</td></tr>
+            <tr><td>tagline</td><td>Short slogan shown in the hero and footer</td></tr>
+            <tr><td>contactEmail</td><td>Shown in the footer and "Contact" buttons</td></tr>
+            <tr><td>values</td><td>Motto words, shown as chips in the hero (see note)</td></tr>
+            <tr><td>socials</td><td>Instagram / Facebook / LinkedIn / Email — update each link + handle</td></tr>
+            <tr><td>stats</td><td>The four big homepage numbers</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout"><b>Heads up:</b> <code>values</code> is currently one combined entry, so it renders as a single chip. To show them separately, split it into individual strings: <code>["Silence", "Charity", "Purity", "Honor", "Patriotism"]</code>. Leave <code>url</code> alone — set the real domain via <code>NEXT_PUBLIC_SITE_URL</code> (next section).</div>
+    </div>
+  </section>
+
+  <!-- 2 -->
+  <section class="section">
+    <div class="section__head">
+      <span class="section__num">02</span>
+      <h2 class="section__title">Secrets &amp; links</h2>
+      <span class="tag tag--essential">Essential</span>
+    </div>
+    <div class="section__body">
+      <p class="lead">Environment variables aren't committed to git. Set them locally, and again in Vercel when you deploy.</p>
+      <div class="files"><span class="file"><span class="file__label">File</span><code>.env.local</code><button class="file__copy" type="button">Copy</button></span></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Variable</th><th>What it does</th></tr></thead>
+          <tbody>
+            <tr><td>ADMIN_PASSWORD</td><td>Password to sign in at <code>/admin</code>. <b>Change this.</b></td></tr>
+            <tr><td>ADMIN_SESSION_SECRET</td><td>Random ≥16-char string securing logins. Generate with <code>openssl rand -base64 32</code>.</td></tr>
+            <tr><td>NEXT_PUBLIC_SITE_URL</td><td>Your real domain (for search &amp; social sharing).</td></tr>
+            <tr><td>NEXT_PUBLIC_NEWSLETTER_URL</td><td>Optional shortcut to change the newsletter link.</td></tr>
+            <tr><td>GOOGLE_CALENDAR_ICS_URL</td><td>Sync events from Google Calendar (Section 04).</td></tr>
+            <tr><td>GOOGLE_SHEET_CSV_URL</td><td>Sync the roster from a Google Sheet (Section 03).</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section class="section">
+    <div class="section__head">
+      <span class="section__num">03</span>
+      <h2 class="section__title">Brothers roster</h2>
+      <span class="tag tag--essential">Essential</span>
+    </div>
+    <div class="section__body">
+      <p class="lead">Two ways to manage the roster — pick one.</p>
+      <ul>
+        <li><b>Google Sheet (recommended, no code):</b> set <code>GOOGLE_SHEET_CSV_URL</code> to a published sheet, then keep it current via the sheet or a linked Google Form.</li>
+        <li><b>Edit the file directly:</b> each brother is an object you can copy and edit.</li>
+      </ul>
+      <div class="files"><span class="or">Option B</span><span class="file"><span class="file__label">File</span><code>src/data/brothers.ts</code><button class="file__copy" type="button">Copy</button></span></div>
+      <pre class="code"><span class="c">// Copy a block and edit the fields</span>
+{
+  firstName: <span class="s">"First"</span>, lastName: <span class="s">"Last"</span>,
+  classYear: <span class="k">2027</span>,
+  major: <span class="s">"Finance"</span>,
+  position: <span class="s">"President"</span>,      <span class="c">// omit for a regular member</span>
+  imageUrl: <span class="s">"https://…/headshot.jpg"</span>, <span class="c">// blank = initials avatar</span>
+  isExecutiveBoard: <span class="k">true</span>,     <span class="c">// shows in the Exec Board section</span>
+  isActive: <span class="k">true</span>,            <span class="c">// false = hidden from the site</span>
+}</pre>
+      <div class="callout"><b>Replace the placeholders:</b> the names in this file are fictional. To remove someone, set <code>isActive: false</code> (keeps history) or delete the block.</div>
+    </div>
+  </section>
+
+  <!-- 4 -->
+  <section class="section">
+    <div class="section__head">
+      <span class="section__num">04</span>
+      <h2 class="section__title">Events &amp; calendar</h2>
+      <span class="tag tag--recommended">Recommended</span>
+    </div>
+    <div class="section__body">
+      <p class="lead">Two ways — pick one.</p>
+      <ul>
+        <li><b>Google Calendar (recommended):</b> set <code>GOOGLE_CALENDAR_ICS_URL</code> and manage everything in Google Calendar. Recurring events and categories are handled for you.</li>
+        <li><b>Edit the file directly.</b></li>
+      </ul>
+      <div class="files"><span class="or">Option B</span><span class="file"><span class="file__label">File</span><code>src/data/events.ts</code><button class="file__copy" type="button">Copy</button></span></div>
+      <pre class="code">{
+  title: <span class="s">"Welcome Back BBQ"</span>,
+  startDate: <span class="s">"2026-08-25T17:00:00"</span>,
+  endDate: <span class="s">"2026-08-25T20:00:00"</span>,   <span class="c">// optional</span>
+  location: <span class="s">"The Quad"</span>,
+  category: <span class="s">"Brotherhood"</span>,          <span class="c">// drives the color</span>
+  isPublic: <span class="k">true</span>,                  <span class="c">// false = hidden</span>
+}</pre>
+      <p style="font-size:0.9rem;color:var(--muted)">Categories: Brotherhood, Recruitment, Philanthropy, Social, Academic, Chapter, Alumni, University, Other.</p>
+    </div>
+  </section>
+
+  <!-- 5 -->
+  <section class="section">
+    <div class="section__head">
+      <span class="section__num">05</span>
+      <h2 class="section__title">Newsletter</h2>
+      <span class="tag tag--recommended">Recommended</span>
+    </div>
+    <div class="section__body">
+      <p class="lead">One entry powers both the homepage preview and the Newsletter page.</p>
+      <div class="files"><span class="file"><span class="file__label">File</span><code>src/data/newsletter.ts</code><button class="file__copy" type="button">Copy</button></span></div>
+      <pre class="code">{
+  title: <span class="s">"The Talisman — Fall 2026 Edition"</span>,
+  publishedDate: <span class="s">"2026-08-01"</span>,
+  description: <span class="s">"Short summary of the issue."</span>,
+  url: <span class="s">"https://…/newsletter.pdf"</span>,  <span class="c">// link or hosted PDF</span>
+}</pre>
+    </div>
+  </section>
+
+  <!-- 6 -->
+  <section class="section">
+    <div class="section__head">
+      <span class="section__num">06</span>
+      <h2 class="section__title">Recruitment &amp; IFC forms</h2>
+      <span class="tag tag--recommended">Recommended</span>
+    </div>
+    <div class="section__body">
+      <p class="lead">Edit the recruitment copy, and paste your real IFC / chapter form links.</p>
+      <div class="files"><span class="file"><span class="file__label">File</span><code>src/config/recruitment.ts</code><button class="file__copy" type="button">Copy</button></span></div>
+      <pre class="code"><span class="c">// A blank url shows a "Link coming soon" chip until you add it</span>
+{
+  title: <span class="s">"IFC New Member Registration"</span>,
+  description: <span class="s">"Register your intake with the Quinnipiac IFC."</span>,
+  url: <span class="s">"https://…"</span>,   <span class="c">// ← your link here</span>
+  required: <span class="k">true</span>,
+}</pre>
+      <p>Recruitment <b>events</b> on this page come automatically from your calendar — anything with the category <code>Recruitment</code> shows up here.</p>
+    </div>
+  </section>
+
+  <!-- 7 -->
+  <section class="section">
+    <div class="section__head">
+      <span class="section__num">07</span>
+      <h2 class="section__title">Welcome Week Potluck</h2>
+      <span class="tag tag--optional">Optional</span>
+    </div>
+    <div class="section__body">
+      <ul>
+        <li><b>Turn on/off:</b> use the toggle in the admin dashboard (<code>/admin</code>), or set <code>FEATURE_POTLUCK</code>.</li>
+        <li><b>Intro text:</b> <code>src/app/(public)/potluck/page.tsx</code> (the two paragraphs up top).</li>
+        <li><b>Sample sign-ups:</b> <code>src/data/potluck.ts</code> — delete once real ones arrive, or from the admin page.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 8 -->
+  <section class="section">
+    <div class="section__head">
+      <span class="section__num">08</span>
+      <h2 class="section__title">Feature flags</h2>
+      <span class="tag tag--recommended">Recommended</span>
+    </div>
+    <div class="section__body">
+      <p class="lead">Turn whole pages on or off.</p>
+      <div class="files"><span class="file"><span class="file__label">File</span><code>src/config/features.ts</code><button class="file__copy" type="button">Copy</button></span></div>
+      <pre class="code">defaultFeatures = {
+  brothers: <span class="k">true</span>, events: <span class="k">true</span>, newsletter: <span class="k">true</span>,
+  about: <span class="k">true</span>, potluck: <span class="k">true</span>, recruitment: <span class="k">true</span>,
+  alumni: <span class="k">false</span>, donations: <span class="k">false</span>, <span class="c">// reserved for later</span>
+}</pre>
+      <p><code>potluck</code> and <code>recruitment</code> can also be flipped live from the admin dashboard — no redeploy needed.</p>
+    </div>
+  </section>
+
+  <!-- 9 -->
+  <section class="section">
+    <div class="section__head">
+      <span class="section__num">09</span>
+      <h2 class="section__title">About &amp; homepage copy</h2>
+      <span class="tag tag--optional">Optional</span>
+    </div>
+    <div class="section__body">
+      <ul>
+        <li><b>About page</b> — history paragraphs, core-value cards, and the Chapter Facts panel: <code>src/app/(public)/about/page.tsx</code></li>
+        <li><b>Homepage "Who We Are" + pillars:</b> <code>src/components/home/about-preview.tsx</code></li>
+        <li><b>Hero heading text</b> (the big name) lives in <code>src/components/home/hero.tsx</code>; the tagline and stats come from <code>site.ts</code>.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 10 -->
+  <section class="section">
+    <div class="section__head">
+      <span class="section__num">10</span>
+      <h2 class="section__title">Branding — crest, colors, favicon</h2>
+      <span class="tag tag--optional">Optional</span>
+    </div>
+    <div class="section__body">
+      <ul>
+        <li><b>Crest letters &amp; wordmark:</b> <code>src/components/brand/logo.tsx</code> (swap the drawn crest for a logo image if you have one).</li>
+        <li><b>Colors:</b> <code>tailwind.config.ts</code> — the palette is <code>navy</code>, <code>cardinal</code> (the red accent), and <code>stone</code> neutrals.</li>
+        <li><b>Favicon:</b> replace <code>src/app/favicon.ico</code> with your own (same filename).</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 11 -->
+  <section class="section">
+    <div class="section__head">
+      <span class="section__num">11</span>
+      <h2 class="section__title">Admin access</h2>
+      <span class="tag tag--essential">Essential</span>
+    </div>
+    <div class="section__body">
+      <p class="lead">Sign in at <code>/admin/login</code> with <code>ADMIN_PASSWORD</code>. From the dashboard you can toggle features, view &amp; delete potluck sign-ups, export them as CSV, and review the current roster, events, and newsletter.</p>
+      <div class="callout"><b>Before launch:</b> set a strong <code>ADMIN_PASSWORD</code> and a random <code>ADMIN_SESSION_SECRET</code>, and add both in Vercel.</div>
+    </div>
+  </section>
+
+  <!-- Checklist -->
+  <section class="checklist" aria-label="Quick-start checklist">
+    <div class="checklist__head">
+      <h2>Quick-start checklist</h2>
+      <div class="checklist__progress"><span id="count">0 of 8 done</span><span class="bar"><span class="bar__fill" id="bar"></span></span></div>
+    </div>
+    <ul id="tasks">
+      <li><label class="check"><input type="checkbox" data-id="t1" /><span><b>Chapter identity</b> — name, university, tagline, contact, socials, stats <span class="tag tag--essential">Essential</span></span></label></li>
+      <li><label class="check"><input type="checkbox" data-id="t2" /><span><b>Secrets</b> — set <code>ADMIN_PASSWORD</code> + <code>ADMIN_SESSION_SECRET</code> (+ site URL) <span class="tag tag--essential">Essential</span></span></label></li>
+      <li><label class="check"><input type="checkbox" data-id="t3" /><span><b>Roster</b> — connect a Google Sheet or edit <code>brothers.ts</code> <span class="tag tag--essential">Essential</span></span></label></li>
+      <li><label class="check"><input type="checkbox" data-id="t4" /><span><b>Events</b> — connect Google Calendar or edit <code>events.ts</code> <span class="tag tag--recommended">Recommended</span></span></label></li>
+      <li><label class="check"><input type="checkbox" data-id="t5" /><span><b>Newsletter</b> — title, date, link <span class="tag tag--recommended">Recommended</span></span></label></li>
+      <li><label class="check"><input type="checkbox" data-id="t6" /><span><b>Recruitment</b> — paste real IFC form links <span class="tag tag--recommended">Recommended</span></span></label></li>
+      <li><label class="check"><input type="checkbox" data-id="t7" /><span><b>Feature flags</b> — decide what's on <span class="tag tag--recommended">Recommended</span></span></label></li>
+      <li><label class="check"><input type="checkbox" data-id="t8" /><span><b>Deploy</b> — push to GitHub → Vercel → add env vars <span class="tag tag--essential">Essential</span></span></label></li>
+    </ul>
+  </section>
+</main>
+
+<footer class="wrap">
+  Alpha Sigma Phi · Theta Tau Chapter · Quinnipiac University<br />
+  Deeper setup notes (Google Sheet, Google Calendar, deployment) live in the project <b>README</b>.
+</footer>
+
+<script>
+  (function () {
+    // Copy-to-clipboard on file chips
+    document.querySelectorAll(".file__copy").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var code = btn.parentElement.querySelector("code");
+        if (!code) return;
+        var text = code.textContent.trim();
+        var done = function () {
+          var old = btn.textContent;
+          btn.textContent = "Copied ✓";
+          btn.classList.add("copied");
+          setTimeout(function () { btn.textContent = old; btn.classList.remove("copied"); }, 1400);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(done).catch(done);
+        } else {
+          var ta = document.createElement("textarea");
+          ta.value = text; document.body.appendChild(ta); ta.select();
+          try { document.execCommand("copy"); } catch (e) {}
+          document.body.removeChild(ta); done();
+        }
+      });
+    });
+
+    // Checklist with localStorage persistence
+    var KEY = "asp-thetatau-personalization-v1";
+    var boxes = Array.prototype.slice.call(document.querySelectorAll("#tasks input[type=checkbox]"));
+    var countEl = document.getElementById("count");
+    var barEl = document.getElementById("bar");
+    var saved = {};
+    try { saved = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) {}
+
+    function render() {
+      var done = boxes.filter(function (b) { return b.checked; }).length;
+      countEl.textContent = done + " of " + boxes.length + " done";
+      barEl.style.width = (boxes.length ? (done / boxes.length) * 100 : 0) + "%";
+    }
+    boxes.forEach(function (b) {
+      var id = b.getAttribute("data-id");
+      if (saved[id]) b.checked = true;
+      b.addEventListener("change", function () {
+        saved[id] = b.checked;
+        try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (e) {}
+        render();
+      });
+    });
+    render();
+  })();
+</script>
